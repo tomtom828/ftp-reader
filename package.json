@@ -1,0 +1,25 @@
+{
+  "name": "ftp-reader",
+  "version": "1.0.0",
+  "description": "Connect to a public ftp and display contents to webapp",
+  "main": "server.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/tomtom28/ftp-reader.git"
+  },
+  "author": "tomtom28",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/tomtom28/ftp-reader/issues"
+  },
+  "homepage": "https://github.com/tomtom28/ftp-reader#readme",
+  "dependencies": {
+    "body-parser": "^1.17.2",
+    "express": "^4.15.3",
+    "express-handlebars": "^3.0.0",
+    "jsftp": "^2.0.0"
+  }
+}
