@@ -27,7 +27,7 @@ app.get('/', function(req,res) {
 
   // Read the README.txt file from FTP
   var str = ""; // Will store the contents of the file 
-  ftp.get('README.txt', function(err, socket) {
+  ftp.get('QSPLLC_INVENTORY_with_PALLETS_(07-28-17).csv', function(err, socket) {
     if (err) return;
  
     socket.on("data", function(d) { str += d.toString(); })
