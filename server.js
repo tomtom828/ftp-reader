@@ -1,6 +1,6 @@
 // Local vs. Heroku FTP Credentials
 var ftpConfig;
-if (process.env == "production") {
+if (process.env.NODE_ENV == "production") {
   ftpConfig = {
     host: process.env.HOST,
     port: 21,
