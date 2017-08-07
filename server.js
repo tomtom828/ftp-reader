@@ -21,13 +21,23 @@ app.engine('handlebars', exphbs({defaultLayout: 'main'}));
 app.set('view engine', 'handlebars');
 
 
-// Basic Index Route
-app.get('/', function(req,res) {
+// =============== Start of Routes ===============
 
+
+// Index Route
+app.get('/', function(req,res) {
+  res.render('index');
+});
+
+
+
+// Basic Index Route
+app.get('/inventory', function(req,res) {
 
   // Read the README.txt file from FTP
   var str = ""; // Will store the contents of the file 
   ftp.get('QSPLLC_INVENTORY_with_PALLETS_(07-28-17).csv', function(err, socket) {
+    
     if (err) return;
  
     socket.on("data", function(d) { str += d.toString(); })
@@ -37,16 +47,48 @@ app.get('/', function(req,res) {
       }
       else {
 
+        // Remove any whitespace
+        str = str.trim();
+
+
+        // Split result by enter key
+        str = str.split("\n");
+
+        // Iterate over each enter split and split by commas
+        var result = [];
+        for (var i = 0; i < str.length; i++) {
+          result.push( str[i].split(",") );
+        }
+
+        // Seperate Table Header from Body
+        var tblHeader = result[0];
+        var tblBody = result.slice(1);
+
+        var tableResult = {
+          header: tblHeader,
+          body: tblBody
+        }
+
         // Render Index Page
-        res.render('index', {hbsObject: str});
-        
+        res.render('inventory', {hbsObject: tableResult});
+
       }
     });
     socket.resume();
   });
 
-
 });
+
+
+
+// Catch All 404 Route (must be the last route listed)
+app.get('*', function(req,res) {
+  res.render('404');
+});
+
+
+// =============== End of Routes ===============
+
 
 // Open Server
 var port = process.env.PORT || 3000;

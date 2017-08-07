@@ -1,0 +1,28 @@
+<header>
+    <a class="logo" href="/">Home</a>
+</header>
+
+{{!-- Inventory Table --}}
+<section>
+    <table>
+
+        {{!-- Iterate over Headers --}}
+        <thead>
+            {{#hbsObject.header}}
+                <th scope="col">{{this}}</th>
+            {{/hbsObject.header}}
+        </thead>
+
+        {{!-- Iterate over Body Rows --}}
+        <tbody>
+            {{#hbsObject.body}}
+                {{!-- Iterate over Row Entries --}}
+                {{#this}}
+                    <td>{{this}}</td>
+                {{/this}}
+            <tr>
+            {{/hbsObject.body}}
+        </tbody>
+
+    </table>
+</section>
