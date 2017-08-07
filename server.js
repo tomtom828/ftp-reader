@@ -1,5 +1,17 @@
-// Import FTP Credentials
-var ftpConfig = require('./config.json');
+// Local vs. Heroku FTP Credentials
+var ftpConfig;
+if (process.env == "production") {
+  ftpConfig = {
+    host: process.env.HOST,
+    port: 21,
+    user: process.env.USER,
+    pass: process.env.PASS
+  }
+}
+else {
+  ftpConfig = require('./config.json');
+}
+
 
 // Node Dependencies
 var express = require('express');
